@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Принцесса ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+
+    /* ОБЫЧНЫЙ РОЗОВЫЙ ФОН */
+    background: #ff6f91;
+}
+
+/* СВЕТЯЩИЕСЯ ПЯТНА */
+body::before, body::after {
+    content: "";
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: rgba(255, 192, 203, 0.4);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+}
+
+body::before {
+    top: 0;
+    left: 0;
+}
+
+body::after {
+    bottom: 0;
+    right: 0;
+}
+
+/* КАРТОЧКА */
+.card {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.35);
+    padding: 20px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 320px;
+    z-index: 1;
+}
+
+/* КНОПКА */
+.main-btn {
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ff2e63;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 30px;
+    color: white;
+    font-size: 16px;
+    transition: 0.6s;
+    z-index: 1;
+}
+
+.show {
+    bottom: 12%;
+}
+
+/* ВЫБОР */
+.choices {
+    display: none;
+    margin-top: 15px;
+}
+
+.choices button {
+    margin: 5px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+}
+
+.yes {
+    background: #00c853;
+    color: white;
+}
+
+.no {
+    background: #ff1744;
+    color: white;
+    position: absolute;
+}
+
+/* СЕРДЕЧКИ */
+.heart {
+    position: fixed;
+    top: -10px;
+    font-size: 18px;
+    animation: fall linear forwards;
+    z-index: 0;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Принцесса ❤️</h2>
+    <p>Я тебя люблю</p>
+    <p>У тебя ахуенная внешность и невероятно красивые сиськии<3 💕</p>
+
+    <div class="choices" id="choices">
+        <button class="yes" onclick="alert('Я тебя никому не отдам❤️')">Да</button>
+        <button class="no" id="noBtn">Нет</button>
+    </div>
+</div>
+
+<button class="main-btn" id="mainBtn">
+    Ты будешь моей всегда?
+</button>
+
+<script>
+// появление кнопки
+setTimeout(() => {
+    document.getElementById("mainBtn").classList.add("show");
+}, 800);
+
+// показать ответы
+document.getElementById("mainBtn").onclick = () => {
+    document.getElementById("choices").style.display = "block";
+};
+
+// убегающее "нет"
+const noBtn = document.getElementById("noBtn");
+
+function moveButton() {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 100);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+noBtn.addEventListener("touchstart", moveButton);
+noBtn.addEventListener("mouseover", moveButton);
+
+// сердечки
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+    heart.style.fontSize = (14 + Math.random() * 20) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 250);
+</script>
+
+</body>
+</html>
